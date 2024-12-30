@@ -1,0 +1,30 @@
+aws lambda add-permission \
+        --function-name <lambda-arn> \
+        --statement-id "CognitoLambdaInvokeAccess" \
+        --action lambda:InvokeFunction \
+        --principal cognito-idp.amazonaws.com
+    
+
+aws cognito-idp update-user-pool \
+        --user-pool-id <user-pool-id> \
+        --lambda-config "PreSignUp={LambdaVersion=V1_0,LambdaArn=<lambda-arn>}, \
+                CustomEmailSender={LambdaVersion=V1_0,LambdaArn=<lambda-arn>}, \
+                KMSKeyID=<kms-key-id>"
+
+aws cognito-idp update-user-pool \
+        --user-pool-id <user-pool-id> \
+        --lambda-config "PreSignUp='{LambdaVersion=V1_0,LambdaArn=<lambda-arn>}', \
+                CustomEmailSender={LambdaVersion=V1_0,LambdaArn=<lambda-arn>}, \
+                KMSKeyID=<kms-key-id>"
+
+aws cognito-idp update-user-pool \
+        --user-pool-id <user-pool-id> \
+        --lambda-config '{"PreSignUp":{"LambdaVersion":"V1_0","LambdaArn":"<lambda-arn>"},"CustomSMSSender":{"LambdaVersion":"V1_0","LambdaArn":"<lambda-arn>"},"CustomEmailSender":{"LambdaVersion":"V1_0","LambdaArn":"<lambda-arn>"},"KMSKeyID":"<kms-key-id>"}'
+
+aws cognito-idp update-user-pool \
+        --user-pool-id <user-pool-id> \
+        --lambda-config "PreSignUp=<lambda-arn>, \
+                CustomEmailSender={LambdaVersion=V1_0,LambdaArn=<lambda-arn>}, \
+                KMSKeyID=arn:aws:kms:eu-west-1:917422171603:key/<kms-key-id>"
+
+aws cognito-idp describe-user-pool --user-pool-id <user-pool-id>

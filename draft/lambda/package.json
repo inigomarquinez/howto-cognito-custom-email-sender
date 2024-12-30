@@ -1,0 +1,17 @@
+{
+  "name": "cognito-signup",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "deploy": "zip -r function.zip . && aws lambda update-function-code --function-name cognito-signup --zip-file fileb://function.zip"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@aws-crypto/client-node": "^3.2.0",
+    "@aws-sdk/client-ses": "^3.290.0",
+    "aws-sdk": "^2.1335.0",
+    "base64-js": "^1.5.1"
+  }
+}
